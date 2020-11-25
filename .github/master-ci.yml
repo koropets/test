@@ -1,0 +1,18 @@
+# Run jobs on anything pushed or tagged on the master branch
+# PyPi is not here, because we only want that on releases/tags
+name: MasterCI
+
+on:
+  release:
+    types: [published, prereleased, edited]
+
+jobs:
+  justtest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Check envs
+        run: | 
+          echo GITHUB_EVENT_NAME $GITHUB_EVENT_NAME
+          cat $GITHUB_EVENT_PATH
